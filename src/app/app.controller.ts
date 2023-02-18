@@ -1,5 +1,5 @@
 import { Get } from '@nestjs/common';
-import { DocumentedController } from 'src/common/decorators/documented-controller.decorator';
+import { DocumentedController } from '../common/decorators/documented-controller.decorator';
 
 @DocumentedController({ name: 'app', path: '/' })
 export class AppController {
