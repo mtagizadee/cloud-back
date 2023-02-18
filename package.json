@@ -6,6 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "migrate:test": "dotenv -e .env.test prisma migrate dev --name init --preview-feature",
     "migrate:dev": "dotenv -e .env.development prisma migrate dev --name init --preview-feature",
     "prebuild": "rimraf dist",
     "build": "nest build",
