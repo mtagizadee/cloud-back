@@ -1,9 +1,13 @@
-import { Controller, Get } from '@nestjs/common';
+import { Get } from '@nestjs/common';
+import { DocumentedController } from 'src/common/decorators/documented-controller.decorator';
 
-@Controller('/')
+@DocumentedController({ name: 'app', path: '/' })
 export class AppController {
+  /**
+   * Get Hello World message to test the API
+   */
   @Get()
   getHello(): string {
-    return 'Hello World!';
+    return 'Hello world!';
   }
 }
