@@ -1,7 +1,7 @@
 import { applyDecorators } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { TDecorator } from '../types/decorator';
+import { TDecorator } from '../types/decorator.type';
 
 type TDocumentedControllerOptions = {
   name: string;
