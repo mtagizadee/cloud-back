@@ -4,6 +4,14 @@ on: [push]
 jobs:
   init:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: testdb
+        ports:
+          - 3306:3306
     strategy:
       matrix:
         node-version: [16.x]
@@ -19,7 +27,5 @@ jobs:
         run: npm run test:e2e
       - name: lint checking
         run: npm run lint
-      - name: formatting the code
-        run: npm run format
       - name: finish
         run: echo "Actions were proceeded successfully 🚀"
