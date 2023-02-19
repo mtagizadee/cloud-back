@@ -30,7 +30,7 @@ export class LocalJwtService {
   ): string {
     return this.jwt.sign(payload, {
       secret: salt,
-      expiresIn: '1d',
+      expiresIn: '15m',
     });
   }
 
