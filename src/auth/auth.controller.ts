@@ -1,4 +1,4 @@
-import { Body, Post, Res } from '@nestjs/common';
+import { Body, Post, Res, Get } from '@nestjs/common';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { DocumentedController } from '../common/decorators/documented-controller.decorator';
 import { TCoockies } from './types/coockies.type';
@@ -14,6 +14,7 @@ import { User } from '@prisma/client';
 import { Response } from 'express';
 import { ResponseBody } from '../common/decorators/response-body.decorator';
 import { UserResponseDto } from '../users/dto/user-response.dto';
+import { CurrentUser } from './decorators/current-user.decorator';
 
 @DocumentedController('auth')
 export class AuthController {
@@ -45,5 +46,14 @@ export class AuthController {
   @ApiConflictResponse({ description: 'User already exists' })
   signup(@Body() createUserDto: CreateUserDto): Promise<MessageResponse> {
     return this.authService.singup(createUserDto);
+  }
+
+  /**
+   * Gets the current user that is logged in
+   */
+  @Get('me')
+  @ResponseBody(UserResponseDto)
+  me(@CurrentUser() user: User): User {
+    return user;
   }
 }
