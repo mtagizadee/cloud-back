@@ -12,7 +12,8 @@ import {
 import { LoginUserDto } from './dto/login-user.dto';
 import { User } from '@prisma/client';
 import { Response } from 'express';
-import { usersFactory } from '../users/helpers';
+import { ResponseBody } from '../common/decorators/response-body.decorator';
+import { UserResponseDto } from '../users/dto/user-response.dto';
 
 @DocumentedController('auth')
 export class AuthController {
@@ -22,6 +23,7 @@ export class AuthController {
    * Logs in a user
    */
   @Post('login')
+  @ResponseBody(UserResponseDto)
   @ApiNotFoundResponse({ description: 'User is not found' })
   @ApiForbiddenResponse({ description: "Password isn't valid" })
   async login(
@@ -33,7 +35,7 @@ export class AuthController {
     response.cookie('refresh_token' as keyof TCoockies, tokens.refreshToken);
     response.setHeader('Authorization', tokens.accessToken);
 
-    return usersFactory(user);
+    return user;
   }
 
   /**
