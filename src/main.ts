@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
 import * as cookies from 'cookie-parser';
 import { coockiesConstants } from './auth/constants/coockies.constants';
+import { ValidationPipe } from '@nestjs/common';
 
 async function build(): Promise<INestApplication> {
   const app = await NestFactory.create(AppModule);
@@ -17,6 +18,7 @@ async function build(): Promise<INestApplication> {
   SwaggerModule.setup('docs', app, document);
 
   app.use(cookies(coockiesConstants.secret));
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   return app;
 }
 
