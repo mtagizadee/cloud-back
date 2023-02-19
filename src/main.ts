@@ -2,6 +2,8 @@ import { INestApplication } from '@nestjs/common/interfaces';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
+import * as cookies from 'cookie-parser';
+import { coockiesConstants } from './common/constants/coockies.constants';
 
 async function build(): Promise<INestApplication> {
   const app = await NestFactory.create(AppModule);
@@ -14,6 +16,7 @@ async function build(): Promise<INestApplication> {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
 
+  app.use(cookies(coockiesConstants.secret));
   return app;
 }
 
