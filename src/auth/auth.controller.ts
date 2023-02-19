@@ -15,6 +15,7 @@ import { Response } from 'express';
 import { ResponseBody } from '../common/decorators/response-body.decorator';
 import { UserResponseDto } from '../users/dto/user-response.dto';
 import { CurrentUser } from './decorators/current-user.decorator';
+import { Auth } from './decorators/auth.decorator';
 
 @DocumentedController('auth')
 export class AuthController {
@@ -53,6 +54,7 @@ export class AuthController {
    */
   @Get('me')
   @ResponseBody(UserResponseDto)
+  @Auth()
   me(@CurrentUser() user: User): User {
     return user;
   }
