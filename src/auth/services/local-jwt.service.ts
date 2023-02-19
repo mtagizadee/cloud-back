@@ -108,17 +108,15 @@ export class LocalJwtService {
     payload: TAccessTokenPayload;
     salt: string;
     response: Response;
-  }): boolean {
+  }): void {
     const { accessToken, salt, response, payload } = params;
 
     try {
       this.jwt.verify(accessToken, { secret: salt });
-
-      return true;
     } catch (error) {
       if (JwtErrors.isTokenExpiredError(error)) {
         this.resetAccessToken({ payload, salt, response });
-        return true;
+        return;
       }
 
       throw new ForbiddenException('The access token is invalid.');
