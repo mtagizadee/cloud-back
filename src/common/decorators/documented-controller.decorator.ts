@@ -8,9 +8,13 @@ type TDocumentedControllerOptions = {
   path?: string;
 };
 
-export const DocumentedController: TDecorator<TDocumentedControllerOptions> = ({
-  name,
-  path,
-}) => {
-  return applyDecorators(ApiTags(name), Controller(path ?? name));
+export const DocumentedController: TDecorator<
+  TDocumentedControllerOptions | string
+> = (args) => {
+  const argsAreString = typeof args === 'string';
+
+  return applyDecorators(
+    ApiTags(argsAreString ? args : args.name),
+    Controller(argsAreString ? args : args.path ?? args.name)
+  );
 };
