@@ -74,7 +74,7 @@ export class LocalJwtService {
       params.salt
     );
 
-    params.response.setHeader('Authorization', `Bearer ${newAccessToken}`);
+    params.response.setHeader('Authorization', newAccessToken);
   }
 
   /**
