@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { TMessage } from '../../common/types/message.type';
+import { MessageResponse } from '../../common/types/message.type';
 import { LocalPrismaService } from '../../local-prisma/local-prisma.service';
 import { CreateUserDto } from '../../users/dto/create-user.dto';
 import { hash } from 'argon2';
@@ -17,7 +17,7 @@ export class AuthService {
    * @param createUserDto - The user data to create a new user with
    * @returns The message that the user was signed up
    */
-  async singup(createUserDto: CreateUserDto): Promise<TMessage> {
+  async singup(createUserDto: CreateUserDto): Promise<MessageResponse> {
     try {
       const hashedPassword = await hash(createUserDto.password);
 

@@ -3,7 +3,7 @@ import { CreateUserDto } from '../users/dto/create-user.dto';
 import { DocumentedController } from '../common/decorators/documented-controller.decorator';
 import { Cookies } from './decorators/coockies.decorator';
 import { TCoockies } from './types/coockies.type';
-import { TMessage } from 'src/common/types/message.type';
+import { MessageResponse } from 'src/common/types/message.type';
 import { AuthService } from './services/auth.service';
 
 @DocumentedController('auth')
@@ -20,7 +20,7 @@ export class AuthController {
   }
 
   @Post('signup')
-  signup(@Body() createUserDto: CreateUserDto): Promise<TMessage> {
+  signup(@Body() createUserDto: CreateUserDto): Promise<MessageResponse> {
     return this.authService.singup(createUserDto);
   }
 }
