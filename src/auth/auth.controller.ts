@@ -50,6 +50,18 @@ export class AuthController {
   }
 
   /**
+   * Logs out a user
+   */
+  @Post('logout')
+  @Auth()
+  async logout(
+    @Res({ passthrough: true }) response: Response
+  ): Promise<MessageResponse> {
+    response.clearCookie('refresh_token' as keyof TCoockies);
+    return { message: 'User successfully logged out.' };
+  }
+
+  /**
    * Gets the current user that is logged in
    */
   @Get('me')
