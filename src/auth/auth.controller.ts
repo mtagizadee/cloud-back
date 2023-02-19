@@ -12,6 +12,7 @@ import {
 import { LoginUserDto } from './dto/login-user.dto';
 import { User } from '@prisma/client';
 import { Response } from 'express';
+import { usersFactory } from '../users/helpers';
 
 @DocumentedController('auth')
 export class AuthController {
@@ -30,9 +31,9 @@ export class AuthController {
     const { user, tokens } = await this.authService.login(loginUserDto);
 
     response.cookie('refresh_token' as keyof TCoockies, tokens.refreshToken);
-    response.setHeader('Authorization', 'Bearer ' + tokens.accessToken);
+    response.setHeader('Authorization', tokens.accessToken);
 
-    return user;
+    return usersFactory(user);
   }
 
   /**
