@@ -3,7 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
 import * as cookies from 'cookie-parser';
-import { coockiesConstants } from './common/constants/coockies.constants';
+import { coockiesConstants } from './auth/constants/coockies.constants';
 
 async function build(): Promise<INestApplication> {
   const app = await NestFactory.create(AppModule);
