@@ -3,6 +3,8 @@ export type TAccessTokenPayload = {
 };
 
 export type TRefreshTokenPayload = {
+  id: number;
+
   /**
    * This salt is used to invalidate the pair of tokens
    * salt is going to be the secret key of the access token
