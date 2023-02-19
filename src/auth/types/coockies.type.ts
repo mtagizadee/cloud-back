@@ -1,3 +1,3 @@
 export type TCoockies = {
-  temp: string;
+  refresh_token: string;
 };

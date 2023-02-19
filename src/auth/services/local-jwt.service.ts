@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt/dist';
-import { TJwtPayload } from '../types/jwt-payload.type';
+import { TJwtPair, TJwtPayload } from '../types/jwt.type';
 
 @Injectable()
 export class LocalJwtService {
@@ -28,5 +28,17 @@ export class LocalJwtService {
       secret: process.env.REFRESH_TOKEN_SECRET,
       expiresIn: '7d',
     });
+  }
+
+  /**
+   * Generates a pair of access and refresh tokens
+   * @param payload - The payload to generate the access and refresh tokens with
+   * @returns  The access and refresh tokens
+   */
+  generatePair(payload: TJwtPayload): TJwtPair {
+    return {
+      accessToken: this.generateAccessToken(payload),
+      refreshToken: this.generateRefreshToken(payload),
+    };
   }
 }
