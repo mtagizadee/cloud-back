@@ -116,7 +116,8 @@ export class LocalJwtService {
     } catch (error) {
       if (JwtErrors.isTokenExpiredError(error)) {
         this.resetAccessToken({ payload, salt, response });
-        return;
+
+        throw new UnauthorizedException('The access token has expired.');
       }
 
       throw new ForbiddenException('The access token is invalid.');
